@@ -1,19 +1,7 @@
 echo
 echo "Configuring dotfiles"
 
-rm -rf ~/.dotfiles
-pushd ~/
-if [ ! -d ~/.dotfiles ]; then
-    git clone https://github.com/danielporfirio/dotfiles.git ~/.dotfiles
-    rsync   --exclude ".git/" \
-            --exclude ".DS_Store" \
-            --exclude ".osx" \
-            --exclude "bootstrap.sh" \
-            --exclude "README.md" \
-            --exclude "LICENSE-MIT.txt" \
-		        -av ~/.dotfiles ~/
-fi
-popd
+rsync -avh --no-perms files/.dotfiles/ ~;
 
 echo
 echo "Configuring bash"

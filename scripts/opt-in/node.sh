@@ -4,6 +4,10 @@ echo "Installing most recent version of NodeJS"
 brew install node
 
 echo
+echo "Update npm"
+npm install -g npm
+
+echo
 echo "Installing global NodeJS Packages"
 
 npm install --global yo
