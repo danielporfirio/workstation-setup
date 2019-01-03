@@ -35,7 +35,3 @@ curl -o cred-alert-cli \
   https://s3.amazonaws.com/cred-alert/cli/current-release/cred-alert-cli_${os_name}
 chmod 755 cred-alert-cli
 mv cred-alert-cli /usr/local/bin # <= or other directory in ${PATH}
-
-# install GnuPG to enable PGP-signing commits.
-brew install gnupg
-brew cask install gpg-suite

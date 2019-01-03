@@ -7,6 +7,8 @@ echo "Installing applications"
 
 # Utilities
 
+brew cask install gpg-suite
+
 brew cask install flycut
 brew cask install spectacle
 

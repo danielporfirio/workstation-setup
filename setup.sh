@@ -9,8 +9,13 @@
 set -e
 
 echo "Caching password..."
+# Removes the user's cached credentials entirely
 sudo -K
-sudo true;
+# Ask for the administrator password upfront
+sudo -v
+# Keep-alive: update existing `sudo` time stamp
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 clear
 
 MY_DIR="$(dirname "$0")"
@@ -19,7 +24,6 @@ MY_DIR="$(dirname "$0")"
 source ${MY_DIR}/scripts/common/homebrew.sh
 source ${MY_DIR}/scripts/common/configuration-bash.sh
 
-# Place any applications that require the user to type in their password here
 brew tap caskroom/cask
 
 source ${MY_DIR}/scripts/common/git.sh
