@@ -42,8 +42,12 @@ brew cask install visual-studio-code
 brew cask install dropbox
 brew cask install google-backup-and-sync
 
-#Music player
+# Music streaming
 brew cask install spotify
 
+# Others
+brew install tree
+brew install tmux
+#https://github.com/samoshkin/tmux-config
 
 set -e

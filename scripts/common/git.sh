@@ -12,6 +12,7 @@ brew cask install sourcetree
 echo
 echo "Setting global Git configurations"
 git config --global core.editor /usr/local/bin/vim
+#git config --global core.editor "code --wait"
 git config --global transfer.fsckobjects true
 
 HOOKS_DIRECTORY=$HOME/workspace/git-hooks-core

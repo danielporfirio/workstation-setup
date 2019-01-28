@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo 'Customizing OS X configuration'
+set +e
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -99,7 +100,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 sudo systemsetup -setrestartfreeze on
 
 # Never go into computer sleep mode
-sudo systemsetup -setcomputersleep Off > /dev/null
+# sudo systemsetup -setcomputersleep On > /dev/null
 
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
@@ -123,15 +124,15 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-# Disable hibernation (speeds up entering sleep mode)
-sudo pmset -a hibernatemode 0
+# # Disable hibernation (speeds up entering sleep mode)
+# sudo pmset -a hibernatemode 0
 
-# Remove the sleep image file to save disk space
-sudo rm /private/var/vm/sleepimage
-# Create a zero-byte file instead…
-sudo touch /private/var/vm/sleepimage
-# …and make sure it can’t be rewritten
-sudo chflags uchg /private/var/vm/sleepimage
+# # Remove the sleep image file to save disk space
+# sudo rm /private/var/vm/sleepimage
+# # Create a zero-byte file instead…
+# sudo touch /private/var/vm/sleepimage
+# # …and make sure it can’t be rewritten
+# sudo chflags uchg /private/var/vm/sleepimage
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -178,7 +179,7 @@ defaults write -g com.apple.keyboard.fnState -boolean true
 # Note: if you’re in the US, replace `BRL` with `USD`,
 # `pt-BR` with `en_US`, and `false` with `true`.
 defaults write NSGlobalDomain AppleLanguages -array "pt" "en"
-defaults write NSGlobalDomain AppleLocale -string "pt-BR@currency=BRL"
+defaults write NSGlobalDomain AppleLocale -string "en-BR@currency=BRL"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool false
 
@@ -812,7 +813,6 @@ for app in "Activity Monitor" \
 	"Safari" \
 	"Spectacle" \
 	"SystemUIServer" \
-	"Terminal" \
 	"Transmission" \
 	"iCal"; do
 	killall "${app}" &> /dev/null
@@ -830,5 +830,5 @@ for application in "Notes" \
 	"iTerm"; do
 	dockutil --add "/Applications/"${application}".app"  --allhomes
 done
-
+set -e
 echo "Done. Note that some of these changes require a logout/restart to take effect."
